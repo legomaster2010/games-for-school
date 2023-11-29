@@ -1,0 +1,46 @@
+import random
+
+class turboracer:
+    def __init__(self, player_name):
+        self.player_name = player_name
+        self.obstacles = ["car", "truck", "oil spill"]
+        self.score = 0
+
+    def display_intro(self):
+        print(f"Welcome to Turbo Racer, {self.player_name}! Get ready for high-speed action.")
+
+    def accelerate(self):
+        input("\nPress Enter to accelerate...")
+
+    def generate_obstacle(self):
+        return random.choice(self.obstacles)
+
+    def player_action(self):
+        return input("Do you want to swerve left (L), swerve right (R), or maintain speed (M)? ").upper()
+
+    def play_game(self):
+        print("\nThe race begins!")
+
+        while True:
+            self.accelerate()
+            obstacle = self.generate_obstacle()
+
+            print(f"\nWatch out! A {obstacle} is on the road!")
+
+            action = self.player_action()
+
+            if (action == "L" and obstacle != "truck") or (action == "R" and obstacle != "car"):
+                print("You skillfully avoided the obstacle! +1 point")
+                self.score += 1
+            elif action == "M" and obstacle != "oil spill":
+                print("You safely maneuvered through the hazard! +1 point")
+                self.score += 1
+            else:
+                print(f"Oops! You collided with the {obstacle}. Game over! Your score: {self.score}")
+                break
+
+if __name__ == "__main__":
+    player_name = input("Enter your name: ")
+    game = TurboRacer(player_name)
+    game.display_intro()
+    game.play_game() 
